@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login- Students</title>
+    
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="student_login.css" />
+    
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>Exam Portal</h1>
+      <div class="main">
+        <h1>Login to your account</h1>
+        <h3>Enter your username and password to login</h3>
+
+        <form action="/students" method="post">
+          <label for="user">Username</label>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">@</span>
+            <input
+              name="semail"
+              type="email"
+              class="form-control"
+              aria-label="Username"
+              aria-describedby="basic-addon1"
+            />
+          </div>
+
+          <label for="pass">Password</label>
+          <div class="input-group mb-3">
+            <input
+              name="spass"
+              type="password"
+              class="form-control"
+              aria-label="Username"
+              aria-describedby="basic-addon1"
+            />
+          </div>
+
+          <button type="submit" class="btn btn-primary">Login</button>
+          <div class="register">
+            <p>Don't have account?&nbsp;&nbsp;</p>
+            <button type="button" onclick="register()">Register</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <script>
+        
+        function register(){
+          window.location.href = `${window.location.origin}/student-register/`;
+        }
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam Portal- Login</title>
+    <link rel="stylesheet" href="first_login.css">
+</head>
+<body>
+    <div class="container">
+        <h1>welcome to online exam portal</h1>
+        <h2>all <span class="auto-type"></span></h2>
+        <div class="login_button_container">
+            <button class="student" onclick="student()">login as student</button>
+            <button class="teacher" onclick="teacher()">login as teacher</button>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <script>
+        const typed = new Typed(".auto-type", {
+            strings: [" the best!"],
+            typeSpeed: 150,
+            backSpeed: 150,
+            loop: true
+        })
+
+        function student(){
+            window.location.href = `${window.location.href}students/`;
+        }
+
+        function teacher(){
+            window.location.href = `${window.location.href}teachers/`;
+        }
+    </script>
+</body>
+</html>

@@ -136,7 +136,7 @@ app.route('/teacher-register')
         });
         newTeacher.save();
 
-        res.render("teacher_login-rej", { validity: true });
+        res.send({registered: 'success'});
     })
 
 // Starting server-----------------------------------------------------------------------------------------------------

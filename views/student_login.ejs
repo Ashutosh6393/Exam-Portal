@@ -54,7 +54,6 @@
           urlEncodedDataPairs.push(`${encodeURIComponent(name)}=${encodeURIComponent(value)}`);
           }
       const urlEncodedData = urlEncodedDataPairs.join('&').replace(/%20/g, '+');
-      console.log(xhr1)
       xhr1.onload = function () {
         const dat= JSON.parse(this.responseText)
         if (dat.login === 'success') {

@@ -1,4 +1,5 @@
 // Importing all required modules------------------------------------------------------------------------------------
+'use strict'
 
 const express = require("express");
 const bodyParser = require("body-parser");
@@ -52,7 +53,7 @@ app.route("/students")
             } else {
                 const leng = info.length;
                 let found = false;
-                for (i = 0; i < leng; i++) {
+                for (let i = 0; i < leng; i++) {
                     if (info[i].email === semail && info[i].password === spassword) {
                         found = true;
                         res.send({login: 'success'});
@@ -90,7 +91,7 @@ app.route('/teachers')
     .post((req, res) => {
         const temail = req.body.temail;
         const tid = req.body.tid;
-        const tpassword = req.body.tpass;
+        const tpass = req.body.tpass;
 
         tData.find(function (err, info) {
             if (err) {
@@ -98,19 +99,20 @@ app.route('/teachers')
             } else {
                 const leng = info.length;
                 let found = 0;
-                for (i = 0; i < leng; i++) {
+
+                for (let i = 0; i < leng; i++) {
                     if (
                         info[i].email === temail &&
-                        info[i].password === tpassword &&
+                        info[i].password === tpass &&
                         info[i].tID === tid
                     ) {
                         // send teachers panel
                         found = 1;
-                        res.send("<h1>Here will be your Teachers Panel");
+                        res.send({login: 'success'});
                     }
                 }
                 if (found === 0) {
-                    res.render("teacher_login", { validity: true });
+                    res.send({login: 'failed'});
                 }
             }
         })

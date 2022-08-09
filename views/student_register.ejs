@@ -1,64 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login- Students</title>
-    
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
-    />
-    <link rel="stylesheet" href="student_register.css" />
-    
-  </head>
 
-  <body>
-    <div class="container">
-      <h1>Exam Portal</h1>
-      <div class="main">
-        <h1>Create your account</h1>
-        <h3>Enter your email and password to signup</h3>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login- Students</title>
 
-        <form action="/student-register" method="post">
-          <label for="user">New Username</label>
-          <div class="input-group mb-3">
-            <span class="input-group-text" id="basic-addon1">@</span>
-            <input
-              name="semail"
-              type="email"
-              class="form-control"
-              aria-label="Username"
-              aria-describedby="basic-addon1"
-            />
-          </div>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="student_register.css" />
 
-          <label for="pass">Create Password</label>
-          <div class="input-group mb-3">
-            <input
-              name="spass"
-              type="password"
-              class="form-control"
-              aria-label="Username"
-              aria-describedby="basic-addon1"
-            />
-          </div>
+</head>
 
-          <button type="submit" class="btn btn-primary">Create</button>
-          <div class="register">
-            <p>Already have a account!&nbsp;&nbsp;</p>
-            <button type="button" onclick="login()">Login</button>
-          </div>
-        </form>
-      </div>
+<body>
+  <div class="container">
+    <h1>Exam Portal</h1>
+    <div class="main">
+      <h1>Create your account</h1>
+      <h3>Enter your email and password to signup</h3>
+
+      <form action="/student-register" method="post">
+        <label for="user">New Username</label>
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1">@</span>
+          <input name="semail" id="user-input" type="email" class="form-control" aria-label="Username"
+            aria-describedby="basic-addon1" />
+        </div>
+
+        <label for="pass">Create Password</label>
+        <div class="input-group mb-3">
+          <input name="spass" id="pass-input" type="password" class="form-control" aria-label="Username"
+            aria-describedby="basic-addon1" />
+        </div>
+
+        <button type="button" id="sub" class="btn btn-primary">Create</button>
+        <div class="register">
+          <p>Already have a account!&nbsp;&nbsp;</p>
+          <button type="button" onclick="login()">Login</button>
+        </div>
+      </form>
     </div>
-    <script>
-        alert("Enter Details To Sign Up");
-        function login(){
-            window.location.href = `${window.location.origin}/students/`;
-            
+  </div>
+  <script>
+    alert("Enter Details To Sign Up");
+    const sub = document.getElementById('sub');
+    sub.addEventListener('click', () => {
+      auth({ semail: document.getElementById('user-input').value, spass: document.getElementById('pass-input').value })
+    });
+
+    function auth(data) {
+      const xhr1 = new XMLHttpRequest();
+      const urlEncodedDataPairs = [];
+      for (const [name, value] of Object.entries(data)) {
+        urlEncodedDataPairs.push(`${encodeURIComponent(name)}=${encodeURIComponent(value)}`);
+      }
+      const urlEncodedData = urlEncodedDataPairs.join('&').replace(/%20/g, '+');
+      xhr1.onload = function () {
+        const dat = JSON.parse(this.responseText)
+        if (dat.registered === 'success') {
+
+          alert("You are registered successfully");
+
         }
-    </script>
-  </body>
+        else {
+          alert("Somthing went wrong");
+          document.getElementById('user-input').value = '';
+          document.getElementById('pass-input').value = '';
+
+        }
+      }
+
+      xhr1.addEventListener('error', (event) => {
+        alert('Oops! Something went wrong.');
+      });
+
+      xhr1.open('POST', '/student-register', true);
+      xhr1.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+      xhr1.send(urlEncodedData);
+    }
+    function login() {
+      window.location.href = `${window.location.origin}/students/`;
+
+    }
+  </script>
+</body>
+
 </html>

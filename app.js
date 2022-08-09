@@ -56,12 +56,12 @@ app.route("/students")
                 for (let i = 0; i < leng; i++) {
                     if (info[i].email === semail && info[i].password === spassword) {
                         found = true;
-                        res.send({login: 'success'});
+                        res.send({ login: 'success' });
                     }
                 }
 
                 if (found === false) {
-                    res.send({login: 'failed'})
+                    res.send({ login: 'failed' })
                 }
             }
         });
@@ -74,14 +74,14 @@ app.route('/student-register')
     .post((req, res) => {
         const newsEmail = req.body.semail;
         const newspassword = req.body.spass;
+        console.log(newsEmail, newspassword)
 
         const newStudent = new sData({
             email: newsEmail,
             password: newspassword,
         });
         newStudent.save();
-
-        res.render("student_login-rej", { validity: true });
+        res.send({ registered: 'success' });
     })
 
 app.route('/teachers')
@@ -108,11 +108,11 @@ app.route('/teachers')
                     ) {
                         // send teachers panel
                         found = 1;
-                        res.send({login: 'success'});
+                        res.send({ login: 'success' });
                     }
                 }
                 if (found === 0) {
-                    res.send({login: 'failed'});
+                    res.send({ login: 'failed' });
                 }
             }
         })
@@ -120,10 +120,10 @@ app.route('/teachers')
     })
 
 app.route('/teacher-register')
-    .get((req,res)=>{
+    .get((req, res) => {
         res.render('teacher_register')
     })
-    .post((req,res) =>{
+    .post((req, res) => {
         const newsEmail = req.body.temail;
         const newspassword = req.body.tpass;
         const tID = req.body.tID;

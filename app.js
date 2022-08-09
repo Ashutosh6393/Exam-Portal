@@ -55,12 +55,12 @@ app.route("/students")
                 for (i = 0; i < leng; i++) {
                     if (info[i].email === semail && info[i].password === spassword) {
                         found = true;
-                        res.send("<h1>Here will be your Students panel</h1>");
+                        res.send({login: 'success'});
                     }
                 }
 
                 if (found === false) {
-                    res.render("student_login", { validity: true });
+                    res.send({login: 'failed'})
                 }
             }
         });

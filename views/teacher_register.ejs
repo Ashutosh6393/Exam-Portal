@@ -17,27 +17,30 @@
     <h1>Exam Portal</h1>
     <div class="main">
       <h1>Create your account</h1>
-      <h3>Enter your email and password to signup</h3>
+      <h3>Enter your Details to signup</h3>
 
       <form action="/teacher-register" method="post">
-        <label for="user">New Username</label>
+
+        <label for="tname">Name</label>
+        <div class="input-group mb-3">
+          <input name="tname" id="name-input" type="text" class="form-control" required />
+        </div>
+
+        <label for="temail">Email</label>
         <div class="input-group mb-3">
           <span class="input-group-text" id="basic-addon1">@</span>
-          <input name="temail" id="user-input" type="email" class="form-control" aria-label="Username"
-            aria-describedby="basic-addon1" required />
+          <input name="temail" id="email-input" type="email" class="form-control" required />
+        </div>
+        <label for="tschool">School</label>
+        <div class="input-group mb-3">
+          <input name="tschool" id="school-input" type="text" class="form-control" required />
         </div>
 
-        <label for="pass">Create Password</label>
+        <label for="tpass">Create Password</label>
         <div class="input-group mb-3">
-          <input name="tpass" id="pass-input" type="password" class="form-control" required aria-label="Password"
-            aria-describedby="basic-addon1" />
+          <input name="tpass" id="pass-input" type="password" class="form-control" required />
         </div>
-        <label for="pass">Enter Your Teachers ID</label>
-        <div class="input-group mb-3">
-          <input name="tID" id="id-input" type="text" required class="form-control" aria-label="tID" aria-describedby="basic-addon1" />
-        </div>
-
-        <button type="submit" id="sub" class="btn btn-primary">Create</button>
+        <button type="button" id="sub" class="btn btn-primary">Create</button>
         <div class="register">
           <p>Already have a account!&nbsp;&nbsp;</p>
           <button type="button" onclick="login()">Login</button>
@@ -49,7 +52,7 @@
     alert("Enter Details To Sign Up");
     const sub = document.getElementById('sub');
     sub.addEventListener('click', () => {
-      auth({ temail: document.getElementById('user-input').value, tID: document.getElementById('id-input').value, tpass: document.getElementById('pass-input').value })
+      auth({tname: document.getElementById('name-input').value, temail: document.getElementById('email-input').value, tschool: document.getElementById('school-input').value, tpass: document.getElementById('pass-input').value })
     });
 
     function auth(data) {

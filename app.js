@@ -201,19 +201,27 @@ app.route('/teacher-register')
         res.render('teacher_register')
     })
     .post((req, res) => {
-        const newsEmail = req.body.temail;
-        const newspassword = req.body.tpass;
-        const tID = req.body.tID;
+        const id = Math.floor(Math.random() * (99999 - 100 + 1) ) + 100;
+        const newtname = req.body.tname;
+        const newtEmail = req.body.temail;
+        const newtschool = req.body.tschool;
+        const newtpassword = req.body.tpass;
+        const tID = id;
         // console.log(newsEmail, newspassword);
 
         const newTeacher = new tData({
-            email: newsEmail,
-            password: newspassword,
+            name: newtname,
+            email: newtEmail,
+            school: newtschool,
+            password: newtpassword,
             tID: tID,
         });
         newTeacher.save();
+        setTimeout(() => {
+            res.send({ registered: 'success' });
+        }, 100);
 
-        res.send({ registered: 'success' });
+        
     })
 
 app.route('/*')
